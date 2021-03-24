@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.1.2/vue-resource.min.js"></script>
+        <script type="text/javascript" src="nativeScript.js"></script>
+        <script type="text/javascript" src="vueScript.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+
+        <script>
+            window.addEventListener('load', () => {
+                let urlParams = new URLSearchParams(window.location.search);
+                let vue = urlParams.get('vue');
+                if (!vue || vue != 'true') {
+                    return nativeJS();
+                }
+                return vueJS();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="banner">
+                <div class="line">
+                  <span id="output">{{output}}</span>
+                </div>
+              </div>
+            <form class="form-horizontal" @submit.prevent="submit">
+                <div class="form-outline mb-4">
+                    <input type="text" id="input" class="form-control" required="required" v-model="custom" />
+                    <label class="form-label" for="input">Enter text to display</label>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <button id="reset" class="btn btn-secondary btn-block reset" @click="reset">Reset</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" id="submit" class="btn btn-primary btn-block submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
